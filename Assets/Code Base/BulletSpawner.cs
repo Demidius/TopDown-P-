@@ -8,8 +8,8 @@ namespace Code_Base
 {
     public class BulletSpawner : Sounds, IBulletSpawner
     {
-        [SerializeField] private Transform bulletSpawnPoint; // Точка, где будет генерироваться пуля
-        [SerializeField] private GameObject bulletPrefab; // Префаб пули
+        [SerializeField] private Transform bulletSpawnPoint; 
+        [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GunHandler gunHandler;
 
         public event Action Shooting;
@@ -25,7 +25,7 @@ namespace Code_Base
         private void Update()
         {
             
-            if (Input.GetMouseButtonDown(0) && _bulletsManager.BulletsScore > 0) // При клике левой кнопкой мыши
+            if (Input.GetMouseButtonDown(0) && _bulletsManager.BulletsScore > 0) 
             {
                 SpawnBullet();
                 PlaySound(0, volume: 0.7f);

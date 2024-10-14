@@ -79,7 +79,6 @@ namespace Code_Base
             {
                 _timer.StopTimer();
                 _gameOver.OnGameOver();
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 Destroy(gameObject);
             }
         }

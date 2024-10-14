@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -8,7 +9,7 @@ namespace Code_Base
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
-        [SerializeField] private Collider2D spawnArea;
+        [SerializeField] private List<Collider2D> spawnAreas;
         [SerializeField] private float spawnInterval = 2f;
         [SerializeField] private float timeMod;
         [SerializeField] private float minDistansForEnemy;
@@ -26,7 +27,6 @@ namespace Code_Base
         {
             StartCoroutine(SpawnObjects());
         }
-
 
         private IEnumerator SpawnObjects()
         {
@@ -61,12 +61,15 @@ namespace Code_Base
 
         private void SpawnObjectInCollider()
         {
+            if (spawnAreas.Count == 0) return;
+
             Vector3 randomPosition;
             if (_player != null)
             {
                 do
                 {
-                    randomPosition = GetRandomPointInCollider(spawnArea);
+                    var randomCollider = spawnAreas[Random.Range(0, spawnAreas.Count)];
+                    randomPosition = GetRandomPointInCollider(randomCollider);
                 } while (Vector3.Distance(randomPosition, _player.Transform.position) < minDistansForEnemy);
 
                 Instantiate(prefab, randomPosition, Quaternion.identity);

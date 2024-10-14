@@ -18,7 +18,7 @@ namespace Code_Base
         public void Launch(Vector2 launchDirection)
         {
             direction = launchDirection;
-            Destroy(gameObject, lifetime); // Самоуничтожение после 5 секунд
+            Destroy(gameObject, lifetime); 
         }
         private void Update()
         {

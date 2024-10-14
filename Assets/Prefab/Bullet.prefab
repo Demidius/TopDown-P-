@@ -102,7 +102,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: 4d6e5ccb3d08d2140a5dcce2542d1dee, type: 3}
   randSound: []
-  loopSound: 0
+  loopSound: 1
   lootPrefab: {fileID: 7864359528361072160, guid: e3451aaae31231d40a721ee8cde0c13c, type: 3}
   direction: {x: 0, y: 0}
 --- !u!61 &3496683400712038948

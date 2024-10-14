@@ -10,13 +10,10 @@ namespace Code_Base
         private Vector3 _moveDirection;
         private Rigidbody2D _rigidbody;
     
-        
         private Player _player;
         public Transform Transform => transform;
 
         [SerializeField] private float _moveSpeed = 1;
-
-
 
         void Start()
         {
