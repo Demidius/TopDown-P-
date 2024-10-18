@@ -11,7 +11,11 @@ namespace Code_Base
         [SerializeField] private Text _bulletsScoreText;
         private IBulletSpawner _bulletSpawner;
 
+        [SerializeField] private Slider ammoSlider; // Ссылка на слайдер
+
+
         public int BulletsScore { get; set; } = 10;
+        public int maxAmmo { get; set; } = 10;
 
         [Inject]
         private void Construct(IPlayer player, IBulletSpawner _bulletSpawner)
@@ -23,7 +27,11 @@ namespace Code_Base
         void Start()
         {
             _bulletSpawner.Shooting += Shoot;
+
+            ammoSlider.maxValue = maxAmmo;
+            ammoSlider.value = BulletsScore;
         }
+
 
         private void UpdateScore()
         {
@@ -34,11 +42,12 @@ namespace Code_Base
         {
             BulletsScore--;
             UpdateScore();
+            ammoSlider.value = BulletsScore;
         }
 
         public void Reload()
         {
-            if (BulletsScore < 10)
+            if (BulletsScore < maxAmmo)
             {
                 BulletsScore++;
                 UpdateScore();
@@ -49,6 +58,8 @@ namespace Code_Base
                 PlaySound(1);
                 StartCoroutine(FlashRedText());
             }
+
+            ammoSlider.value = BulletsScore;
         }
 
         private IEnumerator FlashRedText()
