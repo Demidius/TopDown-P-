@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Player
+namespace Player.Movement
 {
-    public interface IPlayerSpeedCalculate
+    public interface IPlayerSpeedProvider
     {
         float GetSpeed(Vector2 direction);
     }

@@ -1,16 +1,17 @@
 using Infrastructure.Services.Time;
+using Player.Movement;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerSpeedCalculate : IPlayerSpeedCalculate
+    public class PlayerSpeedProvider : IPlayerSpeedProvider
     {
         private readonly ITimeService _timeService;
         private readonly PlayerSpeedConfig _config;
 
         private float _accelerationProgress;
 
-        public PlayerSpeedCalculate(PlayerSpeedConfig config, ITimeService timeService)
+        public PlayerSpeedProvider(PlayerSpeedConfig config, ITimeService timeService)
         {
             _timeService = timeService;
             _config = config;

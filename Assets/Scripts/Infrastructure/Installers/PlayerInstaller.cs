@@ -1,5 +1,6 @@
 using Core.Move;
 using Player;
+using Player.Movement;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;

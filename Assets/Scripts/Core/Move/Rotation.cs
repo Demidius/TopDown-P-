@@ -5,15 +5,13 @@ namespace Core.Move
 {
     public class Rotation : IRotation
     {
-        private readonly Transform _transform;
-        private readonly float _rotationSpeedInDegrees;
+        private readonly IRotatable _rotatable;
         private readonly ITimeService _timeService;
 
-        public Rotation(Transform transform, float rotationSpeedInDegrees, ITimeService timeService)
+        public Rotation(IRotatable rotatable, ITimeService timeService)
         {
+            _rotatable = rotatable;
             _timeService = timeService;
-            _transform = transform;
-            _rotationSpeedInDegrees = rotationSpeedInDegrees;
         }
 
         public void Rotate(Vector2 direction)
@@ -22,12 +20,12 @@ namespace Core.Move
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             Quaternion newRotation = Quaternion.Euler(0, 0, angle);
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, newRotation, rotationStep);
+            _rotatable.Target.rotation = Quaternion.Slerp(_rotatable.Target.rotation, newRotation, rotationStep);
         }
 
         private float CalculateRotationStep(float deltaTime)
         {
-            float rotationStep = deltaTime * _rotationSpeedInDegrees;
+            float rotationStep = deltaTime * _rotatable.RotationSpeedInDegrees;
             return Mathf.Clamp01(rotationStep);
         }
     }
