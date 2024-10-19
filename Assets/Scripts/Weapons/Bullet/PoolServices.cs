@@ -1,65 +1,67 @@
 using System;
 using System.Collections.Generic;
+using Infrastructure.Factories;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace Weapons.Bullet
 {
-    public class PoolServices<T> where T : MonoBehaviour
+    public class PoolServices<T> where T : Component
     {
         public T PrefabObject { get; }
-        public bool AutoExpand { get; set; }
         public Transform Container { get; }
 
-        private List<T> pool;
+        private Queue<T> pool;
+
+        private IFactoryComponent _factoryComponent;
 
         public PoolServices(T prefab, int count, Transform container)
         {
-            this.PrefabObject = prefab;
-            this.Container = container;
-            this.CreatePool(count);
+            PrefabObject = prefab;
+            Container = container;
+            CreatePool(count);
+        }
+
+        [Inject]
+        private void Construct(IFactoryComponent factoryComponent)
+        {
+            _factoryComponent = factoryComponent;
         }
 
         private void CreatePool(int count)
         {
-            this.pool = new List<T>();
-
+            pool = new Queue<T>();
             for (int i = 0; i < count; i++)
-                this.CreateObject();
+                CreateObject();
         }
 
         private T CreateObject(bool isActiveByDefault = false)
         {
-            var createdObject = Object.Instantiate(this.PrefabObject, this.Container);
+            var createdObject = _factoryComponent.Create(PrefabObject);
             createdObject.gameObject.SetActive(isActiveByDefault);
-            this.pool.Add(createdObject);
+            this.pool.Enqueue(createdObject);
             return createdObject;
         }
 
-        public bool HasFreeElement(out T element)
+        public T GetElement()
         {
-            foreach (var mono in pool)
+            T element;
+            if (pool.Count > 0)
             {
-                if (!mono.gameObject.activeInHierarchy)
-                {
-                    element = mono;
-                    return true;
-                }
+                element = pool.Dequeue();
             }
-
-            element = null;
-            return false;
+            else
+            {
+                element = CreateObject(isActiveByDefault: true);
+            }
+            return element;
         }
-
-        public T GetFreeElement()
+        
+        public void ReturnToPool(T element)
         {
-            if (this.HasFreeElement(out var element))
-                return element;
-            
-            if(this.AutoExpand)
-                return this.CreateObject(isActiveByDefault: true);
-            
-            throw new Exception($"Cannot get free element in pool of type {typeof(T).Name}");
+            element.gameObject.SetActive(false);
+            pool.Enqueue(element);
         }
     }
 }

@@ -4,30 +4,31 @@ using Weapons.Gun;
 namespace Weapons.Bullet
 {
     public class PoolBulletExample : MonoBehaviour
-
     {
     [SerializeField] private int _poolSize = 10;
-    [SerializeField] private bool _autoExpand = false;
     [SerializeField] private Bullet _bulletPrefab;
 
     private PoolServices<Bullet> _pool;
  
     private void Start()
     {
-        _pool = new PoolServices<Bullet>(_bulletPrefab, _poolSize, this.gameObject.transform);
-        this._pool.AutoExpand = _autoExpand;
+        _pool = new PoolServices<Bullet>(_bulletPrefab, _poolSize, gameObject.transform);
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-            this.GetBullet(Vector3.zero); 
+        if(Input.GetKeyDown(KeyCode.C))
+            GetBullet(Vector3.zero, 2 ); 
+        
     }
 
-    private void GetBullet(Vector3 direction )
+    private void GetBullet(Vector3 direction, float speed )
     {
-        var bullet = _pool.GetFreeElement();
-        
+        var bullet = _pool.GetElement();
+        bullet.transform.position = direction;
+        bullet.SetParameters(speed, _pool);
+
+
     }
 
     }

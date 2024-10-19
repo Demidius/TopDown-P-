@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1265,7 +1264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &134239721
 Transform:
   m_ObjectHideFlags: 0
@@ -8542,6 +8541,7 @@ GameObject:
   - component: {fileID: 1049557315}
   - component: {fileID: 1049557314}
   - component: {fileID: 1049557316}
+  - component: {fileID: 1049557317}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -8564,6 +8564,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1049557316}
+  - {fileID: 1049557317}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -8615,6 +8616,18 @@ MonoBehaviour:
   timer: {fileID: 1599337087}
   killCounter: {fileID: 1463095420}
   music: {fileID: 626160740}
+--- !u!114 &1049557317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049557313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fc30f2a36a444e8b1974145c1c031e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1059562588
 GameObject:
   m_ObjectHideFlags: 0
@@ -10911,6 +10924,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1324026229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1324026231}
+  - component: {fileID: 1324026230}
+  m_Layer: 0
+  m_Name: PoolBullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1324026230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324026229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44fe0d1bfd744c59a602725bc97bd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolSize: 10
+  _bulletPrefab: {fileID: 6052659036052202489, guid: 2736bfb24ae97974b9e5f3e5405c74d9, type: 3}
+--- !u!4 &1324026231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324026229}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1346375243
 GameObject:
   m_ObjectHideFlags: 0
@@ -19288,6 +19347,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6862711126021538611, guid: 88b7f1a3e0ed386438204ece788a5b00, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6886380193116845217, guid: 88b7f1a3e0ed386438204ece788a5b00, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -19327,3 +19390,4 @@ SceneRoots:
   - {fileID: 1730999561}
   - {fileID: 1070797584}
   - {fileID: 1844063233}
+  - {fileID: 1324026231}

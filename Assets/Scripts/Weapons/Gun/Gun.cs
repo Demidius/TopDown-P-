@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Weapons.Bullet;
 
 namespace Weapons.Gun
 {
