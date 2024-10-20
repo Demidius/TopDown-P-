@@ -1,5 +1,6 @@
 using Infrastructure.Factories;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Weapons.Bullet;
 using Zenject;
 using Bullet = Code_Base.Bullet;
@@ -8,11 +9,9 @@ namespace Infrastructure.Installers
 {
     public class FactoryInstaller : MonoInstaller
     {
-        [SerializeField]
-        public FactoryComponent factoryComponent;
-        
-        [SerializeField] private Bullet bulletComponent;
-        [SerializeField] private int _poolSize = 10;
+     
+        [SerializeField] private Bullet2 bulletComponent;
+        [FormerlySerializedAs("_poolSize")] [SerializeField] private int _poolCount = 10;
 
         public override void InstallBindings()
         {
@@ -20,13 +19,16 @@ namespace Infrastructure.Installers
             Container
                 .Bind<IFactoryComponent>()
                 .To<FactoryComponent>()
-                .FromInstance(factoryComponent)
                 .AsSingle();
+            
 
           
-            Container.Bind<PoolServices<Bullet>>()
+            Container.Bind<PoolServices<Bullet2>>()
+                .To<PoolServices<Bullet2>>()
                 .AsSingle()
-                .WithArguments(bulletComponent, _poolSize, this.transform);
+                .WithArguments(bulletComponent, _poolCount, this.transform);
+            
+           
         }
     }
 }

@@ -6,14 +6,14 @@ using Weapons.Gun;
 
 namespace Weapons.Bullet
 {
-    public class Bullet : MonoBehaviour, IBullet
+    public class Bullet2 : MonoBehaviour, IBullet
     {
         [SerializeField] private float lifetime = 2f;
      //   private Vector3 _direction;
       //  private float _speed;
-        private PoolServices<Bullet> _pool;
+        private PoolServices<Bullet2> _pool;
 
-        public void SetParameters(float speed, PoolServices<Bullet> pool)
+        public void SetParameters(float speed, PoolServices<Bullet2> pool)
         {
             _pool = pool;
      //       _speed = speed;

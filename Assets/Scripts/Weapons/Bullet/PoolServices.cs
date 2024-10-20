@@ -12,60 +12,50 @@ namespace Weapons.Bullet
         public T PrefabObject { get; }
         public Transform Container { get; }
 
-        private Queue<T> pool;
+        private readonly Queue<T> pool = new();
 
         private IFactoryComponent _factoryComponent;
-        
+
         private int poolCount;
 
-        public PoolServices(T prefab, int count, Transform container)
+        public PoolServices(T prefab, int count, Transform container, IFactoryComponent factoryComponent)
         {
+            _factoryComponent = factoryComponent;
             PrefabObject = prefab;
             Container = container;
             poolCount = count;
+            Instantiate(poolCount);
         }
 
-        [Inject]
-        private void Construct(IFactoryComponent factoryComponent)
-        {
-            _factoryComponent = factoryComponent;
-            CreatePool(poolCount);
-        }
 
-        private void CreatePool(int count)
+        private void Instantiate(int count)
         {
-            pool = new Queue<T>();
             for (int i = 0; i < count; i++)
-                CreateObject();
+                pool.Enqueue(CreateComponent());
         }
 
-        private T CreateObject(bool isActiveByDefault = false)
+        private T CreateComponent(bool isActiveByDefault = false)
         {
             var createdObject = _factoryComponent.Create(PrefabObject);
             createdObject.transform.SetParent(Container);
             createdObject.gameObject.SetActive(isActiveByDefault);
-            this.pool.Enqueue(createdObject);
             return createdObject;
         }
 
-        public T GetElement()
+        public T GetElement() => 
+            pool.Count <= 0 ? CreateComponent(isActiveByDefault: true) : GetAndActivate();
+
+        private T GetAndActivate()
         {
-            T element;
-            if (pool.Count > 0)
-            {
-                element = pool.Dequeue();
-            }
-            else
-            {
-                element = CreateObject(isActiveByDefault: true);
-            }
-            return element;
+            var obj = pool.Dequeue();
+            obj.gameObject.SetActive(true);
+            return pool.Dequeue();
         }
-        
+
         public void ReturnToPool(T element)
         {
             element.gameObject.SetActive(false);
-            pool.Enqueue(element);
+            pool.Enqueue(element); 
         }
     }
 }

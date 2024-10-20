@@ -1,5 +1,6 @@
 using UnityEngine;
-using Weapons.Gun;
+using UnityEngine.Serialization;
+
 using Zenject;
 
 namespace Weapons.Bullet
@@ -7,13 +8,12 @@ namespace Weapons.Bullet
     public class PoolBulletExample : MonoBehaviour
     {
     //[SerializeField] private int _poolSize = 10;
-    [SerializeField] private Bullet _bulletPrefab;
+    [FormerlySerializedAs("_bulletPrefab")] [SerializeField] private Bullet2 bullet2Prefab;
 
-    private PoolServices<Bullet> _pool;
+    private PoolServices<Bullet2> _pool;
  
-    
     [Inject]
-    public void Construct(PoolServices<Bullet> pool)
+    public void Construct(PoolServices<Bullet2> pool)
     {
         _pool = pool;
     }

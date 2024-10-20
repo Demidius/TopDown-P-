@@ -8452,6 +8452,7 @@ GameObject:
   - component: {fileID: 1049557315}
   - component: {fileID: 1049557314}
   - component: {fileID: 1049557316}
+  - component: {fileID: 1049557317}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -8474,7 +8475,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1049557316}
-  - {fileID: 0}
+  - {fileID: 1049557317}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -8526,6 +8527,20 @@ MonoBehaviour:
   timer: {fileID: 1599337087}
   killCounter: {fileID: 1463095420}
   music: {fileID: 626160740}
+--- !u!114 &1049557317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049557313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fc30f2a36a444e8b1974145c1c031e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletComponent: {fileID: 6052659036052202489, guid: 2736bfb24ae97974b9e5f3e5405c74d9, type: 3}
+  _poolCount: 10
 --- !u!1 &1059562588
 GameObject:
   m_ObjectHideFlags: 0
@@ -10747,6 +10762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324026231}
+  - component: {fileID: 1324026232}
   m_Layer: 0
   m_Name: PoolBullets
   m_TagString: Untagged
@@ -10769,6 +10785,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1324026232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324026229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44fe0d1bfd744c59a602725bc97bd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet2Prefab: {fileID: 1509932644}
 --- !u!1 &1346375243
 GameObject:
   m_ObjectHideFlags: 0
@@ -12026,6 +12055,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b75dcc07904a443a87965969e9f852, type: 3}
+--- !u!114 &1509932644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5239576220835178935, guid: 7091f8e07d567e745a4f39978296d425, type: 3}
+  m_PrefabInstance: {fileID: 2142129634}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9823a8939bb4421bada6e71b67d5ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1519254867
 GameObject:
   m_ObjectHideFlags: 0
@@ -19031,11 +19071,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5498825240839438542, guid: 7091f8e07d567e745a4f39978296d425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.44
       objectReference: {fileID: 0}
     - target: {fileID: 5498825240839438542, guid: 7091f8e07d567e745a4f39978296d425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 5498825240839438542, guid: 7091f8e07d567e745a4f39978296d425, type: 3}
       propertyPath: m_LocalPosition.z
