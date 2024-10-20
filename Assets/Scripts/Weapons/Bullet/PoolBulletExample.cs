@@ -1,20 +1,23 @@
 using UnityEngine;
 using Weapons.Gun;
+using Zenject;
 
 namespace Weapons.Bullet
 {
     public class PoolBulletExample : MonoBehaviour
     {
-    [SerializeField] private int _poolSize = 10;
+    //[SerializeField] private int _poolSize = 10;
     [SerializeField] private Bullet _bulletPrefab;
 
     private PoolServices<Bullet> _pool;
  
-    private void Start()
+    
+    [Inject]
+    public void Construct(PoolServices<Bullet> pool)
     {
-        _pool = new PoolServices<Bullet>(_bulletPrefab, _poolSize, gameObject.transform);
+        _pool = pool;
     }
-
+  
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.C))

@@ -15,18 +15,21 @@ namespace Weapons.Bullet
         private Queue<T> pool;
 
         private IFactoryComponent _factoryComponent;
+        
+        private int poolCount;
 
         public PoolServices(T prefab, int count, Transform container)
         {
             PrefabObject = prefab;
             Container = container;
-            CreatePool(count);
+            poolCount = count;
         }
 
         [Inject]
         private void Construct(IFactoryComponent factoryComponent)
         {
             _factoryComponent = factoryComponent;
+            CreatePool(poolCount);
         }
 
         private void CreatePool(int count)
@@ -39,6 +42,7 @@ namespace Weapons.Bullet
         private T CreateObject(bool isActiveByDefault = false)
         {
             var createdObject = _factoryComponent.Create(PrefabObject);
+            createdObject.transform.SetParent(Container);
             createdObject.gameObject.SetActive(isActiveByDefault);
             this.pool.Enqueue(createdObject);
             return createdObject;
