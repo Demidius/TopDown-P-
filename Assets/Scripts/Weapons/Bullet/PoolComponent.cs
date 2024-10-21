@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace Weapons.Bullet
 {
-    public class PoolServices<T> where T : Component
+    public class PoolComponent<T> where T : Component
     {
         public T PrefabObject { get; }
         public Transform Container { get; }
@@ -18,7 +18,7 @@ namespace Weapons.Bullet
 
         private int poolCount;
 
-        public PoolServices(T prefab, int count, Transform container, IFactoryComponent factoryComponent)
+        public PoolComponent(T prefab, int count, Transform container, IFactoryComponent factoryComponent)
         {
             _factoryComponent = factoryComponent;
             PrefabObject = prefab;
@@ -49,7 +49,7 @@ namespace Weapons.Bullet
         {
             var obj = pool.Dequeue();
             obj.gameObject.SetActive(true);
-            return pool.Dequeue();
+            return obj;
         }
 
         public void ReturnToPool(T element)

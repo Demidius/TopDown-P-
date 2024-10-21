@@ -11,11 +11,11 @@ namespace Weapons.Bullet
         [SerializeField] private float lifetime = 2f;
      //   private Vector3 _direction;
       //  private float _speed;
-        private PoolServices<Bullet2> _pool;
+        private PoolComponent<Bullet2> _poolComponent;
 
-        public void SetParameters(float speed, PoolServices<Bullet2> pool)
+        public void SetParameters(float speed, PoolComponent<Bullet2> poolComponent)
         {
-            _pool = pool;
+            _poolComponent = poolComponent;
      //       _speed = speed;
         }
 
@@ -37,7 +37,7 @@ namespace Weapons.Bullet
 
         private void Deactivate()
         {
-            _pool?.ReturnToPool(this);
+            _poolComponent?.ReturnToPool(this);
         }
     }
 }
