@@ -5,7 +5,7 @@ using Infrastructure.StateMachine.States.Base;
 
 namespace Infrastructure.StateMachine.States
 {
-    public class LoadLevelState : IPayloadState<SceneData>
+    public class LoadLevelState : IPayloadState<SceneData>, IState
     {
         public void Enter(SceneData payload)
         {
@@ -13,6 +13,11 @@ namespace Infrastructure.StateMachine.States
         }
 
         public void Exit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Enter()
         {
             throw new System.NotImplementedException();
         }

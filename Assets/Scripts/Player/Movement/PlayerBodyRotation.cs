@@ -3,6 +3,7 @@ using Core.Move;
 using Infrastructure.Factories;
 using Infrastructure.Services.Inputs;
 using UnityEngine;
+using Zenject;
 
 namespace Player.Movement
 {
@@ -14,7 +15,8 @@ namespace Player.Movement
         private IInputService _inputService;
         private IRotation _rotation;
 
-        private void Construct(IInputService service, IFactoryMovement factoryMovement)
+        [Inject]
+        public void Construct(IInputService service, IFactoryMovement factoryMovement)
         {
             _inputService = service;
             _rotation = factoryMovement.CreatRotation(this);
